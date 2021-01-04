@@ -1,19 +1,41 @@
+import { View } from 'native-base';
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, SafeAreaView, TextInput, Text, TouchableOpacity } from 'react-native';
 
 class FormulaireScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Fill up your informations!</Text>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Voie</Text>
+          <TextInput style={styles.textInput} />
+        </View>
 
-        <Button
-          title="look for parkings with these informations"
-          onPress={() =>
-            this.props.navigation.navigate('Liste')
-          }
-        />
-      </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Rue</Text>
+          <TextInput style={styles.textInput} />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Code postal</Text>
+          <TextInput style={styles.textInput} />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Environ (km)</Text>
+          <TextInput style={styles.textInput} /> 
+          {/* TODO: slider? */}
+        </View>
+
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('Liste')}
+          >
+            <Text style={styles.buttonText}>Rechercher</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -25,6 +47,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  textInput: {
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+    width: 270, // TODO: relative size?
+    borderColor: '#C9C9C9',
+    marginTop: 5
+  },
+  inputContainer: {
+    marginBottom: 25
+  },
+  label: {
+    color: '#5E5F6F',
+  },
+  button: {
+    backgroundColor: '#4152F2',
+    paddingTop: 25,
+    paddingBottom: 25,
+    paddingLeft: 80,
+    paddingRight: 80,
+    borderRadius: 5,
+    alignItems: 'center'
+  },
+  buttonText: {
+    color: 'white',
+  }
 });
 
 export default FormulaireScreen;
