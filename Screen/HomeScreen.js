@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity } from 'react-native';
 
 class HomeScreen extends React.Component {
+  constructor() {
+    super();
+  }
   
   render() {
     return (

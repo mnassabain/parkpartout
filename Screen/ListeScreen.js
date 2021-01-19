@@ -3,6 +3,16 @@ import { StyleSheet, View, SafeAreaView, TouchableOpacity, ScrollView } from 're
 import { Card, CardItem, Text } from 'native-base';
 
 class ListeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      voie: this.props.route.params.voie,
+      rue: this.props.route.params.rue,
+      codepostal: this.props.route.params.codepostal,
+      environ: this.props.route.params.environ,
+  };
+  }
+
   render() {
     var listItems = ['La rotonde', 'Gambetta', 'Parking 3', 'Parking 4', 'a', 'b', 'c', 'd'].map((item) => {
       return (
@@ -36,8 +46,15 @@ class ListeScreen extends React.Component {
         <ScrollView contentContainerStyle={styles.scrollView}>
 
         <View style={styles.listInfo}>
-          <Text style={styles.total}>Liste résultats(15)</Text>
+          <Text style={styles.total}>Avenue rentrée: { this.state.voie }</Text>
+          <Text style={styles.total}>Rue rentrée: { this.state.rue }</Text>
+          <Text style={styles.total}>Code Postal rentré: { this.state.codepostal }</Text>
+          <Text style={styles.total}>Distance max rentrée: { this.state.environ }</Text>
         </View>
+
+        <View style={styles.listInfo}>
+          <Text style={styles.total}>Liste résultats(15)</Text>
+        </View>        
 
         { listItems }
 

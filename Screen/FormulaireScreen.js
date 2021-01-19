@@ -3,34 +3,49 @@ import React from 'react';
 import { StyleSheet, SafeAreaView, TextInput, Text, TouchableOpacity } from 'react-native';
 
 class FormulaireScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        voie: "",
+        rue: "",
+        codepostal: "",
+        environ: "1000",
+    };
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Voie</Text>
-          <TextInput style={styles.textInput} />
+          <TextInput style={styles.textInput} onChangeText={(text) => this.setState({voie: text})} value={this.state.voie} />
         </View>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Rue</Text>
-          <TextInput style={styles.textInput} />
+          <TextInput style={styles.textInput} onChangeText={(text) => this.setState({rue: text})} value={this.state.rue} />
         </View>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Code postal</Text>
-          <TextInput style={styles.textInput} />
+          <TextInput style={styles.textInput} onChangeText={(text) => this.setState({codepostal: text})} value={this.state.codepostal} />
         </View>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Environ (km)</Text>
-          <TextInput style={styles.textInput} /> 
+          <Text style={styles.label}>Environ (m)</Text>
+          <TextInput style={styles.textInput} onChangeText={(text) => this.setState({environ: text})} value={this.state.environ} /> 
           {/* TODO: slider? */}
         </View>
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => this.props.navigation.navigate('Liste')}
+            onPress={() => this.props.navigation.navigate('Liste', {
+              voie: this.state.voie,
+              rue: this.state.rue,
+              codepostal: this.state.codepostal,
+              environ: this.state.environ,
+            })}
           >
             <Text style={styles.buttonText}>Rechercher</Text>
           </TouchableOpacity>
