@@ -112,7 +112,7 @@ class FormulaireScreen extends React.Component {
     })
   }
 
-  syncData()
+  async syncData()
   {
     var listeParking = this.state.listeParking;
     var detail = this.state.detailsParking;
