@@ -146,9 +146,7 @@ class FormulaireScreen extends React.Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => this.props.navigation.navigate('Liste', {
-              voie: this.state.voie,
               rue: this.state.rue,
-              codepostal: this.state.codepostal,
               environ: this.state.environ,
               x: this.state.x,
               y: this.state.y,

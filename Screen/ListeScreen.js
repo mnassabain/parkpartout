@@ -6,9 +6,7 @@ class ListeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      voie: this.props.route.params.voie,
       rue: this.props.route.params.rue,
-      codepostal: this.props.route.params.codepostal,
       environ: this.props.route.params.environ,
       x: this.props.route.params.x,
       y: this.props.route.params.y,
@@ -48,9 +46,7 @@ class ListeScreen extends React.Component {
         <ScrollView contentContainerStyle={styles.scrollView}>
 
         <View style={styles.listInfo}>
-          <Text style={styles.total}>Avenue rentrée: { this.state.voie }</Text>
           <Text style={styles.total}>Rue rentrée: { this.state.rue }</Text>
-          <Text style={styles.total}>Code Postal rentré: { this.state.codepostal }</Text>
           <Text style={styles.total}>Distance max rentrée: { this.state.environ }</Text>
           <Text style={styles.total}>Coord x rentrée: { this.state.x }</Text>
           <Text style={styles.total}>Coord y rentrée: { this.state.y }</Text>
