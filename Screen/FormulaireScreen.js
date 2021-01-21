@@ -14,7 +14,6 @@ class FormulaireScreen extends React.Component {
         addresses: [],
         x: "",
         y: "",
-        details: [],
     };
   }
 
@@ -97,16 +96,40 @@ class FormulaireScreen extends React.Component {
 
   getParking()
   {
-    var uri = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=parkings&q=&geofilter.distance=" + this.state.y + "%2C" + this.state.x + "%2C" + this.state.environ;
-
+    var uriinfos = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=parkings&q=&geofilter.distance=" + this.state.y + "%2C" + this.state.x + "%2C" + this.state.environ;
+    var urilive = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=occupation-parkings-temps-reel&q=&rows=30&facet=etat_descriptif";
     // appel à l'api pour récupérer la liste des parkings
-    fetch(uri).then(res => res.json()).then(data => {
+    fetch(uriinfos).then(res => res.json()).then(data => {
       this.setState({
-        listeParking: data,
+        listeParking: data
       });
-      this.props.navigation.navigate('Liste', {
-        listeParking: this.state.listeParking,
-      })
+    })
+    fetch(urilive).then(res => res.json()).then(data => {
+      this.setState({
+        detailsParking: data
+      });
+      this.syncData();
+    })
+  }
+
+  syncData()
+  {
+    var listeParking = this.state.listeParking;
+    var detail = this.state.detailsParking;
+    
+    for (let j = 0; j < detail.records.length; j++)
+    {
+      var index = listeParking.records.findIndex(el => el.fields.idsurfs == detail.records[j].fields.idsurfs);
+      if (index != -1) // element not found if index == -1
+      {
+        listeParking.records[index] = {...listeParking.records[index], libre: detail.records[j].fields.libre};
+      }
+    }
+
+    this.setState({listeParking});
+
+    this.props.navigation.navigate('Liste', {
+      listeParking: this.state.listeParking
     })
   }
 

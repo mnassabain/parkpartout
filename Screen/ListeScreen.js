@@ -23,16 +23,18 @@ class ListeScreen extends React.Component {
           >
           <TouchableOpacity
             onPress={() =>
-              this.props.navigation.navigate('Fiche')
+              this.props.navigation.navigate('Fiche', {
+                name: item.fields.name,
+                adress: item.fields.address,
+                dist: item.fields.dist,
+                libre: item.libre,
+              })
             }
           >
             <CardItem style={styles.listItemInfo}>
               <View>
                 <Text style={{fontWeight: 'bold'}}>
                   { item.fields.name }
-                </Text>
-                <Text style={{fontWeight: 'bold'}}>
-                  { item.fields.address }
                 </Text>
               </View>
               <View style={styles.listItemInfoBottom}>

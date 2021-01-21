@@ -3,6 +3,16 @@ import { StyleSheet, View, SafeAreaView } from 'react-native';
 import { Card, CardItem, Text } from 'native-base';
 
 class FicheScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: this.props.route.params.name,
+      adress: this.props.route.params.adress,
+      dist: this.props.route.params.dist,
+      libre: this.props.route.params.libre,
+  };
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -10,11 +20,12 @@ class FicheScreen extends React.Component {
         <Card style={styles.itemInfoContainer}>
           <CardItem style={styles.itemInfo}>
             <View style={styles.itemHeader}>
-              <Text style={styles.itemName}>Parking Gambetta</Text>
-              <Text>50 places</Text>
+              <Text style={styles.itemName}>{ this.state.name }</Text>
+              { this.state.libre != undefined &&
+              <Text>{ this.state.libre } places</Text> }
             </View>
-            <Text style={{marginBottom: 5}}>1 Parc de l'Etoile</Text>
-            <Text>1 km</Text>
+            <Text style={{marginBottom: 5}}>{ this.state.adress }</Text>
+            <Text>{ this.state.dist } mètre(s)</Text>
           </CardItem>
         </Card>
 
