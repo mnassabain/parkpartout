@@ -14,6 +14,7 @@ class FormulaireScreen extends React.Component {
         addresses: [],
         x: "",
         y: "",
+        details: [],
     };
   }
 
@@ -94,6 +95,21 @@ class FormulaireScreen extends React.Component {
         return suggestions;
   }
 
+  getParking()
+  {
+    var uri = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=parkings&q=&geofilter.distance=" + this.state.y + "%2C" + this.state.x + "%2C" + this.state.environ;
+
+    // appel à l'api pour récupérer la liste des parkings
+    fetch(uri).then(res => res.json()).then(data => {
+      this.setState({
+        listeParking: data,
+      });
+      this.props.navigation.navigate('Liste', {
+        listeParking: this.state.listeParking,
+      })
+    })
+  }
+
   render() {
 
     // Selection des suggestions par rapport à l'adresse renseignée
@@ -118,11 +134,6 @@ class FormulaireScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        {/* <View style={styles.inputContainer}>
-          <Text style={styles.label}>Voie</Text>
-          <TextInput style={styles.textInput} onChangeText={(text) => this.setState({voie: text})} value={this.state.voie} />
-        </View> */}
-
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Rue</Text>
           <TextInput id='inputRue' style={styles.textInput} value={this.state.rue} onChangeText={value => this.predictionAddress(value)}/>
@@ -130,11 +141,6 @@ class FormulaireScreen extends React.Component {
         <View style={{ position: 'absolute', zIndex: 1000, width: '100%', bottom: 0 }}>
           { suggestions }
         </View>
-
-        {/* <View style={styles.inputContainer}>
-          <Text style={styles.label}>Code postal</Text>
-          <TextInput style={styles.textInput} onChangeText={(text) => this.setState({codepostal: text})} value={this.state.codepostal} />
-        </View> */}
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Environ (m)</Text>
@@ -145,12 +151,7 @@ class FormulaireScreen extends React.Component {
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => this.props.navigation.navigate('Liste', {
-              rue: this.state.rue,
-              environ: this.state.environ,
-              x: this.state.x,
-              y: this.state.y,
-            })}
+            onPress={() => this.getParking()}
           >
             <Text style={styles.buttonText}>Rechercher</Text>
           </TouchableOpacity>

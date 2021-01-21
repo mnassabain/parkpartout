@@ -6,57 +6,59 @@ class ListeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rue: this.props.route.params.rue,
-      environ: this.props.route.params.environ,
-      x: this.props.route.params.x,
-      y: this.props.route.params.y,
+      listePar: this.props.route.params.listeParking,
   };
   }
 
   render() {
-    var listItems = ['La rotonde', 'Gambetta', 'Parking 3', 'Parking 4', 'a', 'b', 'c', 'd'].map((item) => {
-      return (
-        <Card
-          key={item}
-          style={styles.listItem}
-        >
-        <TouchableOpacity
-          onPress={() =>
-            this.props.navigation.navigate('Fiche')
-          }
-        >
-          <CardItem style={styles.listItemInfo}>
-            <View>
-              <Text style={{fontWeight: 'bold'}}>
-                { item }
-              </Text>
-            </View>
-            <View style={styles.listItemInfoBottom}>
-              <Text>11 places</Text>
-              <Text>1 km</Text>
-            </View>
-          </CardItem>
-          </TouchableOpacity>
-        </Card>
-      );
-    });
+    var liste = [];
+    var message = "";
+    if (this.state.listePar.nhits != 0) {
+      var message = "Voici la liste des parkings trouvé(s)!";
+      var liste = this.state.listePar.records.map((item) => {
+        return (
+          <Card
+            key={item.fields.idsurfs}
+            style={styles.listItem}
+          >
+          <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate('Fiche')
+            }
+          >
+            <CardItem style={styles.listItemInfo}>
+              <View>
+                <Text style={{fontWeight: 'bold'}}>
+                  { item.fields.name }
+                </Text>
+                <Text style={{fontWeight: 'bold'}}>
+                  { item.fields.address }
+                </Text>
+              </View>
+              <View style={styles.listItemInfoBottom}>
+                <Text>{ item.fields.dist } mètre(s)</Text>
+              </View>
+            </CardItem>
+            </TouchableOpacity>
+          </Card>
+        );
+      });
+    }
+    else {
+      var message = "Aucun parking trouvé.";
+    }
 
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-
         <View style={styles.listInfo}>
-          <Text style={styles.total}>Rue rentrée: { this.state.rue }</Text>
-          <Text style={styles.total}>Distance max rentrée: { this.state.environ }</Text>
-          <Text style={styles.total}>Coord x rentrée: { this.state.x }</Text>
-          <Text style={styles.total}>Coord y rentrée: { this.state.y }</Text>
+          <Text style={styles.total}>{ message }</Text>
         </View>
-
-        <View style={styles.listInfo}>
-          <Text style={styles.total}>Liste résultats(15)</Text>
-        </View>        
-
-        { listItems }
+        { liste != [] &&
+          <View style={styles.listInfo}>
+            <Text style={styles.total}>{ liste }</Text>
+          </View>
+        }
 
         </ScrollView>
       </SafeAreaView>
