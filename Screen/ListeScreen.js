@@ -14,7 +14,7 @@ class ListeScreen extends React.Component {
     var liste = [];
     var message = "";
     if (this.state.listePar.nhits != 0) {
-      var message = "Voici la liste des parkings trouvé(s)!";
+      var message = "Parkings trouvés ("+ this.state.listePar.nhits +")";
       var liste = this.state.listePar.records.map((item) => {
         return (
           <Card
@@ -57,7 +57,7 @@ class ListeScreen extends React.Component {
           <Text style={styles.total}>{ message }</Text>
         </View>
         { liste != [] &&
-          <View style={styles.listInfo}>
+          <View style={styles.listContainer}>
             { liste }
           </View>
         }
@@ -86,6 +86,9 @@ const styles = StyleSheet.create({
   },
   total: {
     color: '#868793',
+  },
+  listContainer: {
+    width: '90%',
   },
   listItem: {
     width: '100%',
