@@ -14,6 +14,12 @@ class FormulaireScreen extends React.Component {
         addresses: [],
         x: "",
         y: "",
+        listeParking: {
+          records: []
+        },
+        detailsParking: {
+          records: []
+        }
     };
   }
 
