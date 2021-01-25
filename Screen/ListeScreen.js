@@ -58,7 +58,7 @@ class ListeScreen extends React.Component {
         </View>
         { liste != [] &&
           <View style={styles.listInfo}>
-            <Text style={styles.total}>{ liste }</Text>
+            { liste }
           </View>
         }
 
@@ -88,11 +88,12 @@ const styles = StyleSheet.create({
     color: '#868793',
   },
   listItem: {
-    width: '90%',
+    width: '100%',
     shadowOpacity: 0,
     paddingVertical: 5,
     backgroundColor: '#f0f0f0',
     marginBottom: 15,
+    marginLeft: 0,
   },
   listItemInfo: {
     display: 'flex',
