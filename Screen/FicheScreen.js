@@ -13,6 +13,22 @@ class FicheScreen extends React.Component {
   };
   }
 
+  formatDistance = function(dist) {
+    if (dist < 1000) {
+      return Math.floor(dist) + ' m';
+    } else {
+      if (dist < 10000) {
+        return Number.parseFloat(dist).toFixed(1) + ' km'
+      } else {
+        return Math.floor(dist / 1000) + ' km';
+      }
+    }
+  };
+
+  formatAddress = function(address) {
+    return address.split(' 67')[0];
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -21,11 +37,13 @@ class FicheScreen extends React.Component {
           <CardItem style={styles.itemInfo}>
             <View style={styles.itemHeader}>
               <Text style={styles.itemName}>{ this.state.name }</Text>
-              { this.state.libre != undefined &&
-              <Text>{ this.state.libre } places</Text> }
             </View>
-            <Text style={{marginBottom: 5}}>{ this.state.adress }</Text>
-            <Text>{ this.state.dist } mètre(s)</Text>
+            <Text style={{marginBottom: 5}}>{ this.formatAddress(this.state.adress) }</Text>
+            <View style={styles.itemFooter}>
+              <Text>{ this.formatDistance(this.state.dist) }</Text>
+              { this.state.libre != undefined &&
+              <Text style={styles.places}>{ this.state.libre } places</Text> }
+            </View>
           </CardItem>
         </Card>
 
@@ -66,6 +84,15 @@ const styles = StyleSheet.create({
   itemName: {
     fontWeight: 'bold',
     marginBottom: 5,
+  },
+  itemFooter: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  places: {
+    color: '#67C23A',
+    fontWeight: 'bold'
   },
   mapContainer: {
     width: '90%',
