@@ -171,12 +171,13 @@ class FormulaireScreen extends React.Component {
             <View style={styles.autocompleteContainer}>
               <AutoComplete
                 style={styles.textInput}
+                listStyle={styles.listStyle}
                 defaultValue={ this.state.rue }
                 data={ this.state.addresses }
                 onChangeText={ value => this.predictionAddress(value) }
                 renderItem={data => (
                   <ListItem
-                    style={styles.listStyle}
+                    style={styles.listItemStyle}
                     onPress={evt => this.selectSuggestion( 
                     evt,
                     data.properties.name, 
@@ -193,7 +194,7 @@ class FormulaireScreen extends React.Component {
             { suggestions }
           </View> */}
 
-          <View style={styles.inputContainer}>
+          <View style={styles.environInputContainer}>
             <Text style={styles.label}>Environ (m)</Text>
             <TextInput style={styles.textInput} onChangeText={(text) => this.setState({environ: text})} value={this.state.environ} /> 
             {/* TODO: slider? */}
@@ -228,10 +229,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 15,
-    zIndex: 5,
   },
   listStyle: {
+    borderWidth: 1,
+    borderColor: '#dddddd',
+    borderRadius: 5,
     backgroundColor: 'white',
+  },
+  listItemStyle: {
+    marginLeft: 0,
+    paddingLeft: 10,
   },
   textInput: {
     borderWidth: 1,
@@ -239,12 +246,19 @@ const styles = StyleSheet.create({
     height: 40,
     width: 270, // TODO: relative size?
     borderColor: '#C9C9C9',
-    marginTop: 5
+    marginTop: 5,
+    fontSize: 14,
+    paddingLeft: 10,
   },
   inputContainer: {
     marginBottom: 25,
     position: 'relative',
     marginTop: 40,
+    zIndex: 5,
+  },
+  environInputContainer: {
+    marginTop: 40,
+    marginBottom: 25,
   },
   label: {
     color: '#5E5F6F',
