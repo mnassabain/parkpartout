@@ -1,7 +1,8 @@
 import { View } from 'native-base';
 import React from 'react';
 import { StyleSheet, SafeAreaView, TextInput, Text, TouchableOpacity } from 'react-native';
-import { Button } from 'native-base';
+import AutoComplete from 'native-base-autocomplete';
+import { Button, ListItem } from 'native-base';
 
 class FormulaireScreen extends React.Component {
   constructor(props) {
@@ -162,28 +163,49 @@ class FormulaireScreen extends React.Component {
     var suggestions = this.getSuggestions();
 
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Rue</Text>
-          <TextInput id='inputRue' style={styles.textInput} value={this.state.rue} onChangeText={value => this.predictionAddress(value)}/>
-        </View>
-        <View style={{ position: 'absolute', zIndex: 1000, width: '100%', bottom: 0 }}>
-          { suggestions }
-        </View>
+      <SafeAreaView style={styles.safeAreaContainer}>
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Rue</Text>
+            {/* <TextInput id='inputRue' style={styles.textInput} value={this.state.rue} onChangeText={value => this.predictionAddress(value)}/> */}
+            <View style={styles.autocompleteContainer}>
+              <AutoComplete
+                style={styles.textInput}
+                data={ this.state.addresses }
+                onChangeText={ value => this.predictionAddress(value) }
+                renderItem={data => (
+                  <ListItem
+                    style={styles.listStyle}
+                    onPress={evt => this.selectSuggestion( 
+                    evt,
+                    data.properties.name, 
+                    data.geometry.coordinates[0], 
+                    data.geometry.coordinates[1],
+                  )}>
+                    <Text>{ data.properties.name }</Text>
+                  </ListItem>
+                )}>
+              </AutoComplete>
+            </View>
+          </View>
+          {/* <View style={{ position: 'absolute', zIndex: 1000, width: '100%', bottom: 0 }}>
+            { suggestions }
+          </View> */}
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Environ (m)</Text>
-          <TextInput style={styles.textInput} onChangeText={(text) => this.setState({environ: text})} value={this.state.environ} /> 
-          {/* TODO: slider? */}
-        </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Environ (m)</Text>
+            <TextInput style={styles.textInput} onChangeText={(text) => this.setState({environ: text})} value={this.state.environ} /> 
+            {/* TODO: slider? */}
+          </View>
 
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => this.getParking()}
-          >
-            <Text style={styles.buttonText}>Rechercher</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.getParking()}
+            >
+              <Text style={styles.buttonText}>Rechercher</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -191,11 +213,24 @@ class FormulaireScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeAreaContainer: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 90
+  },
+  container: {
+    marginTop: 110,
+  },
+  autocompleteContainer: {
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 15,
+    zIndex: 5,
+  },
+  listStyle: {
+    backgroundColor: 'white',
   },
   textInput: {
     borderWidth: 1,
@@ -206,7 +241,9 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   inputContainer: {
-    marginBottom: 25
+    marginBottom: 25,
+    position: 'relative',
+    marginTop: 40,
   },
   label: {
     color: '#5E5F6F',
