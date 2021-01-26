@@ -172,6 +172,7 @@ class FormulaireScreen extends React.Component {
               <View style={styles.autocompleteContainer}>
                 <AutoComplete
                   style={styles.textInput}
+                  inputContainerStyle={styles.inputContainerStyle}
                   listStyle={styles.listStyle}
                   defaultValue={ this.state.rue }
                   data={ this.state.addresses }
@@ -257,6 +258,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginTop: 40,
     zIndex: 5,
+  },
+  inputContainerStyle: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'white',
   },
   environInputContainer: {
     marginTop: 40,
