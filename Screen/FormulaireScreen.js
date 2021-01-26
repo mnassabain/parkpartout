@@ -203,12 +203,12 @@ class FormulaireScreen extends React.Component {
             </View>
 
             <View style={styles.buttonsContainer}>
-              <TouchableOpacity
+              <Button
                 style={styles.button}
                 onPress={() => this.getParking()}
               >
                 <Text style={styles.buttonText}>Rechercher</Text>
-              </TouchableOpacity>
+              </Button>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -272,11 +272,14 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#4152F2',
-    paddingTop: 25,
-    paddingBottom: 25,
-    paddingLeft: 80,
-    paddingRight: 80,
+    width: '100%',
+    height: 'auto',
     borderRadius: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
     alignItems: 'center'
   },
   buttonText: {
