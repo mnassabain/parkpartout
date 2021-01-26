@@ -171,6 +171,7 @@ class FormulaireScreen extends React.Component {
             <View style={styles.autocompleteContainer}>
               <AutoComplete
                 style={styles.textInput}
+                defaultValue={ this.state.rue }
                 data={ this.state.addresses }
                 onChangeText={ value => this.predictionAddress(value) }
                 renderItem={data => (
