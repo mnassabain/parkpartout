@@ -10,6 +10,18 @@ class ListeScreen extends React.Component {
   };
   }
 
+  formatDistance = function(dist) {
+    if (dist < 1000) {
+      return Math.floor(dist) + ' m';
+    } else {
+      if (dist < 10000) {
+        return Number.parseFloat(dist).toFixed(1) + ' km'
+      } else {
+        return Math.floor(dist / 1000) + ' km';
+      }
+    }
+  };
+
   render() {
     var liste = [];
     var message = "";
@@ -38,7 +50,7 @@ class ListeScreen extends React.Component {
                 </Text>
               </View>
               <View style={styles.listItemInfoBottom}>
-                <Text>{ item.fields.dist } mètre(s)</Text>
+                <Text>{ this.formatDistance(item.fields.dist) }</Text>
               </View>
             </CardItem>
             </TouchableOpacity>
