@@ -1,6 +1,6 @@
 import { View } from 'native-base';
 import React from 'react';
-import { StyleSheet, SafeAreaView, TextInput, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, SafeAreaView, TextInput, Text, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import AutoComplete from 'native-base-autocomplete';
 import { Button, ListItem } from 'native-base';
 
@@ -164,51 +164,53 @@ class FormulaireScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.safeAreaContainer}>
-        <View style={styles.container}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Rue</Text>
-            {/* <TextInput id='inputRue' style={styles.textInput} value={this.state.rue} onChangeText={value => this.predictionAddress(value)}/> */}
-            <View style={styles.autocompleteContainer}>
-              <AutoComplete
-                style={styles.textInput}
-                listStyle={styles.listStyle}
-                defaultValue={ this.state.rue }
-                data={ this.state.addresses }
-                onChangeText={ value => this.predictionAddress(value) }
-                renderItem={data => (
-                  <ListItem
-                    style={styles.listItemStyle}
-                    onPress={evt => this.selectSuggestion( 
-                    evt,
-                    data.properties.name, 
-                    data.geometry.coordinates[0], 
-                    data.geometry.coordinates[1],
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.container}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Rue</Text>
+              {/* <TextInput id='inputRue' style={styles.textInput} value={this.state.rue} onChangeText={value => this.predictionAddress(value)}/> */}
+              <View style={styles.autocompleteContainer}>
+                <AutoComplete
+                  style={styles.textInput}
+                  listStyle={styles.listStyle}
+                  defaultValue={ this.state.rue }
+                  data={ this.state.addresses }
+                  onChangeText={ value => this.predictionAddress(value) }
+                  renderItem={data => (
+                    <ListItem
+                      style={styles.listItemStyle}
+                      onPress={evt => this.selectSuggestion( 
+                      evt,
+                      data.properties.name, 
+                      data.geometry.coordinates[0], 
+                      data.geometry.coordinates[1],
+                    )}>
+                      <Text>{ data.properties.name }</Text>
+                    </ListItem>
                   )}>
-                    <Text>{ data.properties.name }</Text>
-                  </ListItem>
-                )}>
-              </AutoComplete>
+                </AutoComplete>
+              </View>
+            </View>
+            {/* <View style={{ position: 'absolute', zIndex: 1000, width: '100%', bottom: 0 }}>
+              { suggestions }
+            </View> */}
+
+            <View style={styles.environInputContainer}>
+              <Text style={styles.label}>Environ (m)</Text>
+              <TextInput style={styles.textInput} onChangeText={(text) => this.setState({environ: text})} value={this.state.environ} /> 
+              {/* TODO: slider? */}
+            </View>
+
+            <View style={styles.buttonsContainer}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => this.getParking()}
+              >
+                <Text style={styles.buttonText}>Rechercher</Text>
+              </TouchableOpacity>
             </View>
           </View>
-          {/* <View style={{ position: 'absolute', zIndex: 1000, width: '100%', bottom: 0 }}>
-            { suggestions }
-          </View> */}
-
-          <View style={styles.environInputContainer}>
-            <Text style={styles.label}>Environ (m)</Text>
-            <TextInput style={styles.textInput} onChangeText={(text) => this.setState({environ: text})} value={this.state.environ} /> 
-            {/* TODO: slider? */}
-          </View>
-
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => this.getParking()}
-            >
-              <Text style={styles.buttonText}>Rechercher</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        </TouchableWithoutFeedback>
       </SafeAreaView>
     );
   }
