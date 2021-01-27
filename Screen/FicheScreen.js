@@ -3,6 +3,7 @@ import { StyleSheet, View, SafeAreaView } from 'react-native';
 import { Card, CardItem, Text } from 'native-base';
 
 class FicheScreen extends React.Component {
+  // init class
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +14,10 @@ class FicheScreen extends React.Component {
   };
   }
 
+  /**
+   * Fonction pour formater l'affichage des distances
+   * @param {float} dist la distance en mètres
+   */
   formatDistance = function(dist) {
     if (dist < 1000) {
       return Math.floor(dist) + ' m';
@@ -25,6 +30,10 @@ class FicheScreen extends React.Component {
     }
   };
 
+  /**
+   * Fonction pour formater une adresse
+   * @param {string} address l'adresse
+   */
   formatAddress = function(address) {
     return address.split(' 67')[0];
   }

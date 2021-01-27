@@ -3,6 +3,7 @@ import { StyleSheet, View, SafeAreaView, TouchableOpacity, ScrollView } from 're
 import { Card, CardItem, Text } from 'native-base';
 
 class ListeScreen extends React.Component {
+  // init class
   constructor(props) {
     super(props);
     this.state = {
@@ -10,6 +11,10 @@ class ListeScreen extends React.Component {
   };
   }
 
+  /**
+   * Fonction pour formater l'affichage des distances
+   * @param {float} dist la distance en mètres
+   */
   formatDistance = function(dist) {
     if (dist < 1000) {
       return Math.floor(dist) + ' m';
@@ -25,6 +30,8 @@ class ListeScreen extends React.Component {
   render() {
     var liste = [];
     var message = "";
+
+    // Formatage du résultat qu'on affiche
     if (this.state.listePar.nhits != 0) {
       var message = "Parkings trouvés ("+ this.state.listePar.nhits +")";
       var liste = this.state.listePar.records.map((item) => {
@@ -43,6 +50,7 @@ class ListeScreen extends React.Component {
               })
             }
           >
+            {/* Affichage du nom, ainsi que de la distance qui sépare chaque parking de notre point de recherche */}
             <CardItem style={styles.listItemInfo}>
               <View>
                 <Text style={{fontWeight: 'bold'}}>
@@ -68,6 +76,7 @@ class ListeScreen extends React.Component {
         <View style={styles.listInfo}>
           <Text style={styles.total}>{ message }</Text>
         </View>
+        {/* Si on trouve au moins un parking, on affiche la liste. */}
         { liste != [] &&
           <View style={styles.listContainer}>
             { liste }

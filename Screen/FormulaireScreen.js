@@ -5,6 +5,7 @@ import AutoComplete from 'native-base-autocomplete';
 import { Button, ListItem } from 'native-base';
 
 class FormulaireScreen extends React.Component {
+  // init class
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +24,10 @@ class FormulaireScreen extends React.Component {
     };
   }
 
+  /**
+   * Fonction qui sert à l'autocomplétion pour la recherche de l'utilisateur
+   * @param {*} address ce qu'il est en train d'écrire dans le champs "Rue" du formulaire
+   */
   async predictionAddress(address)
   {
     await this.setState({
@@ -53,7 +58,7 @@ class FormulaireScreen extends React.Component {
   }
 
   /**
-   * 
+   * Fonction qui sauvegarde les informations de l'adresse suggérée seléctionnée par l'utilisateur
    * @param {event} evt 
    * @param {string} address / adresse où l'on veut les coordonnées  
    * @param {float} x / Correspond à la longitude
@@ -72,34 +77,8 @@ class FormulaireScreen extends React.Component {
   }
 
   /**
-   * Retourne les suggestions à afficher sur le DOM 
+   * Function qui récupère les informations détaillées de chaque parking, ainsi que l'occupation en temps réel
    */
-  /*getSuggestions()
-  {
-    var suggestions = []; 
-    for (let i = 0 ; i < this.state.addresses.length ; i++)
-      {
-        suggestions.push(
-          <Button style={{ backgroundColor: '#263194' }} full key={this.state.addresses[i].properties.name}
-                  onPress={evt => this.selectSuggestion( 
-                                                        evt, 
-                                                        this.state.addresses[i].properties.name, 
-                                                        this.state.addresses[i].geometry.coordinates[0], 
-                                                        this.state.addresses[i].geometry.coordinates[1],
-                                                      )}>
-
-            <Text style={{color: "#fff"}}>{this.state.addresses[i].properties.name}</Text>
-          </Button>
-        );
-      }
-
-      // On doit vérifier si le champ de recherche n'a pas bougé entre temps 
-      if (this.state.rue.length < 3)
-        return [];
-      else 
-        return suggestions;
-  }*/
-
   async getParking()
   {
     var uriinfos = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=parkings&q=&geofilter.distance=" + this.state.y + "%2C" + this.state.x + "%2C" + this.state.environ;
@@ -110,35 +89,49 @@ class FormulaireScreen extends React.Component {
         listeParking: data
       });
     })
+    // appel à l'api pour récupérer l'occcupation en temps réel des parkings
     await fetch(urilive).then(res => res.json()).then(data => {
       this.setState({
         detailsParking: data
       });
+      // puis on synchronise les données entre nos 2 réponses d'api
       this.syncData();
     })
   }
 
+  /**
+   * Fonction pour synchroniser les données des 2 api appelées précédemment
+   */
   async syncData()
   {
+    // on n'update pas le state directement, mais on passe par une variable externe, car update un state 
+    // très régulièrement est coûteux sur le long terme
     var listeParking = this.state.listeParking;
     var detail = this.state.detailsParking;
     
     for (let j = 0; j < detail.records.length; j++)
     {
+      // on regarde si on a des informations sur un parking donnée sur les 2 jeux de données
       var index = listeParking.records.findIndex(el => el.fields.idsurfs == detail.records[j].fields.idsurfs);
       if (index != -1) // element not found if index == -1
       {
+        // si on trouve, on ajoute alors à notre premier jeu de données les infos du second jeu de données
         listeParking.records[index] = {...listeParking.records[index], libre: detail.records[j].fields.libre};
       }
     }
 
+    // on peut setState, car c'est une seule variable, bien moins coûteux que d'update dans une boucle 
     this.setState({listeParking});
 
+    // puis on transmet les informations à notre écran suivant, qui s'occupe d'afficher la liste des parkings résultats
     await this.props.navigation.navigate('Liste', {
       listeParking: this.state.listeParking
     })
   }
 
+  /**
+   * Fonction qui permet simplement de désactiver le clic sur le bouton de recherche tant qu'une sélection n'est pas choisie
+   */
   disabledButton()
   {
     this.setState({
@@ -147,34 +140,12 @@ class FormulaireScreen extends React.Component {
   }
 
   render() {
-
-    // Selection des suggestions par rapport à l'adresse renseignée
-    // var suggestions = []; 
-    // for (let i = 0 ; i < this.state.addresses.length ; i++)
-    //   {
-    //     suggestions.push(
-    //       <Button style={{ backgroundColor: '#263194' }} full key={this.state.addresses[i].properties.name}
-    //               onPress={evt => this.selectSuggestion( 
-    //                                                     evt, 
-    //                                                     this.state.addresses[i].properties.name, 
-    //                                                     this.state.addresses[i].geometry.coordinates[0], 
-    //                                                     this.state.addresses[i].geometry.coordinates[1],
-    //                                                   )}>
-
-    //         <Text style={{color: "#fff"}}>{this.state.addresses[i].properties.name}</Text>
-    //       </Button>
-    //     );
-    //   }
-
-    // var suggestions = this.getSuggestions();
-
     return (
       <SafeAreaView style={styles.safeAreaContainer}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={styles.container}>
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Rue</Text>
-              {/* <TextInput id='inputRue' style={styles.textInput} value={this.state.rue} onChangeText={value => this.predictionAddress(value)}/> */}
               <View style={styles.autocompleteContainer}>
                 <AutoComplete
                   style={styles.textInput}
@@ -198,14 +169,10 @@ class FormulaireScreen extends React.Component {
                 </AutoComplete>
               </View>
             </View>
-            {/* <View style={{ position: 'absolute', zIndex: 1000, width: '100%', bottom: 0 }}>
-              { suggestions }
-            </View> */}
 
             <View style={styles.environInputContainer}>
               <Text style={styles.label}>Environ (m)</Text>
-              <TextInput style={styles.textInput} onChangeText={(text) => this.setState({environ: text})} value={this.state.environ} /> 
-              {/* TODO: slider? */}
+              <TextInput style={styles.textInput} onChangeText={(text) => this.setState({environ: text})} value={this.state.environ} />
             </View>
 
             <View style={styles.buttonsContainer}>
@@ -254,7 +221,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     height: 40,
-    width: 270, // TODO: relative size?
+    width: 270,
     borderColor: '#C9C9C9',
     marginTop: 5,
     fontSize: 14,
@@ -264,7 +231,6 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     position: 'relative',
     marginTop: 40,
-    /*zIndex: 5,*/
   },
   inputContainerStyle: {
     borderBottomWidth: 1,
