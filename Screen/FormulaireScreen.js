@@ -83,6 +83,7 @@ class FormulaireScreen extends React.Component {
   {
     var uriinfos = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=parkings&q=&geofilter.distance=" + this.state.y + "%2C" + this.state.x + "%2C" + this.state.environ;
     var urilive = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=occupation-parkings-temps-reel&q=&rows=30&facet=etat_descriptif";
+    console.log(uriinfos);
     // appel à l'api pour récupérer la liste des parkings
     await fetch(uriinfos).then(res => res.json()).then(data => {
       this.setState({
