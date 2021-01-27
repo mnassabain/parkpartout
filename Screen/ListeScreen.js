@@ -8,7 +8,7 @@ class ListeScreen extends React.Component {
     super(props);
     this.state = {
       listePar: this.props.route.params.listeParking,
-  };
+    };
   }
 
   /**
@@ -20,7 +20,7 @@ class ListeScreen extends React.Component {
       return Math.floor(dist) + ' m';
     } else {
       if (dist < 10000) {
-        return Number.parseFloat(dist).toFixed(1) + ' km'
+        return (Number.parseFloat(dist) / 1000).toFixed(1) + ' km'
       } else {
         return Math.floor(dist / 1000) + ' km';
       }
