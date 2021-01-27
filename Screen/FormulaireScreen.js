@@ -8,9 +8,8 @@ class FormulaireScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        voie: "",
+        grise: true,
         rue: "",
-        codepostal: "",
         environ: "1000",
         addresses: [],
         x: "",
@@ -26,7 +25,6 @@ class FormulaireScreen extends React.Component {
 
   async predictionAddress(address)
   {
- 
     await this.setState({
       rue: address,
     });
@@ -68,6 +66,7 @@ class FormulaireScreen extends React.Component {
       addresses: [],
       x: x,
       y: y,
+      grise: false,
     });
 
   }
@@ -75,7 +74,7 @@ class FormulaireScreen extends React.Component {
   /**
    * Retourne les suggestions à afficher sur le DOM 
    */
-  getSuggestions()
+  /*getSuggestions()
   {
     var suggestions = []; 
     for (let i = 0 ; i < this.state.addresses.length ; i++)
@@ -99,19 +98,19 @@ class FormulaireScreen extends React.Component {
         return [];
       else 
         return suggestions;
-  }
+  }*/
 
-  getParking()
+  async getParking()
   {
     var uriinfos = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=parkings&q=&geofilter.distance=" + this.state.y + "%2C" + this.state.x + "%2C" + this.state.environ;
     var urilive = "https://data.strasbourg.eu/api/records/1.0/search/?dataset=occupation-parkings-temps-reel&q=&rows=30&facet=etat_descriptif";
     // appel à l'api pour récupérer la liste des parkings
-    fetch(uriinfos).then(res => res.json()).then(data => {
+    await fetch(uriinfos).then(res => res.json()).then(data => {
       this.setState({
         listeParking: data
       });
     })
-    fetch(urilive).then(res => res.json()).then(data => {
+    await fetch(urilive).then(res => res.json()).then(data => {
       this.setState({
         detailsParking: data
       });
@@ -135,9 +134,16 @@ class FormulaireScreen extends React.Component {
 
     this.setState({listeParking});
 
-    this.props.navigation.navigate('Liste', {
+    await this.props.navigation.navigate('Liste', {
       listeParking: this.state.listeParking
     })
+  }
+
+  disabledButton()
+  {
+    this.setState({
+      grise:true
+    });
   }
 
   render() {
@@ -160,7 +166,7 @@ class FormulaireScreen extends React.Component {
     //     );
     //   }
 
-    var suggestions = this.getSuggestions();
+    // var suggestions = this.getSuggestions();
 
     return (
       <SafeAreaView style={styles.safeAreaContainer}>
@@ -176,7 +182,7 @@ class FormulaireScreen extends React.Component {
                   listStyle={styles.listStyle}
                   defaultValue={ this.state.rue }
                   data={ this.state.addresses }
-                  onChangeText={ value => this.predictionAddress(value) }
+                  onChangeText={ value => { this.disabledButton(); this.predictionAddress(value); }}
                   renderItem={data => (
                     <ListItem
                       style={styles.listItemStyle}
@@ -205,6 +211,7 @@ class FormulaireScreen extends React.Component {
             <View style={styles.buttonsContainer}>
               <Button
                 style={styles.button}
+                disabled={this.state.grise}
                 onPress={() => this.getParking()}
               >
                 <Text style={styles.buttonText}>Rechercher</Text>
@@ -257,7 +264,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     position: 'relative',
     marginTop: 40,
-    zIndex: 5,
+    /*zIndex: 5,*/
   },
   inputContainerStyle: {
     borderBottomWidth: 1,
