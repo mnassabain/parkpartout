@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Button } from 'react-native';
 import { Card, CardItem, Text } from 'native-base';
+import { createOpenLink } from 'react-native-open-maps';
 
 class FicheScreen extends React.Component {
   // init class
@@ -39,6 +40,9 @@ class FicheScreen extends React.Component {
   }
 
   render() {
+    const destination = { query: this.state.adress };
+    const openDestination = createOpenLink(destination);
+
     return (
       <SafeAreaView style={styles.container}>
         
@@ -56,8 +60,11 @@ class FicheScreen extends React.Component {
           </CardItem>
         </Card>
 
-        <Card style={styles.mapContainer}>
-        </Card>
+        <Button 
+          color={'#bdc3c7'}
+          onPress={openDestination}
+          title="Click To Open Maps"
+        />
 
       </SafeAreaView>
     );
