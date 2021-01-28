@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity, Image } from 'react-native';
 
 class HomeScreen extends React.Component {
   constructor() {
@@ -19,7 +19,7 @@ class HomeScreen extends React.Component {
             style={styles.bigButton}
             onPress={() => this.props.navigation.navigate('Formulaire')}
           >
-            <Text>&nbsp;</Text>
+            <Image source={require('../assets/map-marker-alt-solid.png')} style={styles.imageStyle}/>
           </TouchableOpacity>
         </View>
 
@@ -41,35 +41,80 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
   },
   titleContainer: {
     flex: 2,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#4152F2',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 11.14,
+    elevation: 7,
   },
   titleText: {
     fontSize: 30,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'white',
   },
   findContainer: {
     flex: 4,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '80%',
+    marginTop: 20,
+    paddingTop: 30,
+    marginBottom: 20,
+    borderRadius: 30,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   findText: {
     fontSize: 14
   },
   bigButton: {
-    marginTop: 20,
+    backgroundColor: 'white',
     backgroundColor: '#4152F2',
     height: 200,
     width: 200,
-    paddingRight: 80,
+    marginTop: 20,
     borderRadius: 150,
-    alignItems: 'center'
+    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 11.14,
+    elevation: 7,
+  },
+  imageStyle: {
+    width: '40%',
+    height: '100%',
+    resizeMode: 'contain',
   },
   buttonsContainer: {
-    flex: 2
+    flex: 3,
+    marginBottom: 50,
+    width: '100%',
+    alignItems: 'center',
+    borderRadius: 30,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   buttonTitle: {
     marginBottom: 8
