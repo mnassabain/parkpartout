@@ -51,11 +51,11 @@ class FicheScreen extends React.Component {
             <View style={styles.itemHeader}>
               <Text style={styles.itemName}>{ this.state.name }</Text>
             </View>
-            <Text style={{marginBottom: 5, fontFamily: 'Montserrat'}}>
+            <Text style={{marginBottom: 5, fontFamily: 'Rubik'}}>
               { this.formatAddress(this.state.adress) }
             </Text>
             <View style={styles.itemFooter}>
-              <Text style={{fontFamily: 'Montserrat'}}>
+              <Text style={{fontFamily: 'Rubik'}}>
                 { this.formatDistance(this.state.dist) }
               </Text>
               { this.state.libre != undefined &&
@@ -103,8 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemName: {
-    fontFamily: 'Montserrat-Bold',
-    // fontWeight: 'bold',
+    fontFamily: 'Rubik-Medium',
     marginBottom: 5,
   },
   itemFooter: {
@@ -114,8 +113,7 @@ const styles = StyleSheet.create({
   },
   places: {
     color: '#67C23A',
-    fontFamily: 'Montserrat-Bold',
-    // fontWeight: 'bold'
+    fontFamily: 'Rubik-Bold',
   },
   mapContainer: {
     width: '90%',

@@ -18,8 +18,9 @@ class App extends React.Component {
 
   async loadFonts() {
     await Font.loadAsync({
-      Montserrat: require('./assets/fonts/Montserrat-Medium.ttf'),
-      'Montserrat-Bold': require('./assets/fonts/Montserrat-Bold.ttf'),
+      Rubik: require('./assets/fonts/Rubik-Regular.ttf'),
+      'Rubik-Medium': require('./assets/fonts/Rubik-Medium.ttf'),
+      'Rubik-Bold': require('./assets/fonts/Rubik-SemiBold.ttf'),
     });
     this.setState({ fontsLoaded: true });
   }

@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   titleText: {
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: 'Rubik-Bold',
     fontSize: 30,
     color: 'white',
   },
@@ -81,8 +81,7 @@ const styles = StyleSheet.create({
   },
   findText: {
     fontSize: 16,
-    fontFamily: 'Montserrat',
-    // fontWeight: 'bold',
+    fontFamily: 'Rubik',
   },
   bigButton: {
     backgroundColor: 'white',
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
   },
   buttonTitle: {
     marginBottom: 15,
-    fontFamily: 'Montserrat',
+    fontFamily: 'Rubik',
     fontSize: 14,
   },
   button: {
@@ -134,8 +133,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontFamily: 'Montserrat-Bold',
-    fontSize: 14,
+    fontFamily: 'Rubik-Bold',
+    fontSize: 16,
   }
 });
 

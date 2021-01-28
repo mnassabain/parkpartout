@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: 'Rubik-Bold',
     fontSize: 20,
     textAlign: 'center',
     lineHeight: 28,
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   listeItemText: {
-    fontFamily: 'Montserrat',
+    fontFamily: 'Rubik',
   },
   textInput: {
     borderWidth: 1,
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 14,
     paddingLeft: 10,
-    fontFamily: 'Montserrat'
+    fontFamily: 'Rubik'
   },
   inputContainer: {
     marginBottom: 25,
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#5E5F6F',
-    fontFamily: 'Montserrat',
+    fontFamily: 'Rubik',
   },
   button: {
     backgroundColor: '#4152F2',
@@ -287,7 +287,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: 'Rubik-Bold',
+    fontSize: 16,
   },
   suggestionButton: {
     color: 'red',
