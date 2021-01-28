@@ -14,7 +14,7 @@ class HomeScreen extends React.Component {
         </View>
 
         <View style={styles.findContainer}>
-          <Text style={styles.findText}>Trouvez un parking!</Text>
+          <Text style={styles.findText}>Trouver un parking près de moi</Text>
           <TouchableOpacity
             style={styles.bigButton}
             onPress={() => this.props.navigation.navigate('Formulaire')}
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   titleText: {
+    fontFamily: 'Montserrat-Bold',
     fontSize: 30,
-    fontWeight: 'bold',
     color: 'white',
   },
   findContainer: {
@@ -80,7 +80,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   findText: {
-    fontSize: 14
+    fontSize: 16,
+    fontFamily: 'Montserrat',
+    // fontWeight: 'bold',
   },
   bigButton: {
     backgroundColor: 'white',
@@ -117,7 +119,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonTitle: {
-    marginBottom: 8
+    marginBottom: 15,
+    fontFamily: 'Montserrat',
+    fontSize: 14,
   },
   button: {
     backgroundColor: '#4152F2',
@@ -130,6 +134,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 14,
   }
 });
 

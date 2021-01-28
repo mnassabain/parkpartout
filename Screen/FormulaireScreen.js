@@ -144,6 +144,12 @@ class FormulaireScreen extends React.Component {
       <SafeAreaView style={styles.safeAreaContainer}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={styles.container}>
+
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Chercher parkings près d'une adresse</Text>
+            </View>
+            
+            
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Rue</Text>
               <View style={styles.autocompleteContainer}>
@@ -163,7 +169,7 @@ class FormulaireScreen extends React.Component {
                       data.geometry.coordinates[0], 
                       data.geometry.coordinates[1],
                     )}>
-                      <Text>{ data.properties.name }</Text>
+                      <Text style={styles.listeItemText}>{ data.properties.name }</Text>
                     </ListItem>
                   )}>
                 </AutoComplete>
@@ -196,16 +202,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingTop: 90
   },
   container: {
-    marginTop: 110,
+    width: '100%',
+    height: '100%',
+    padding: '15%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',    
+  },
+  titleContainer: {
+    width: '100%',
+  },
+  title: {
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 20,
+    textAlign: 'center',
+    lineHeight: 28,
   },
   autocompleteContainer: {
     left: 0,
     position: 'absolute',
     right: 0,
     top: 15,
+    width: '100%',
   },
   listStyle: {
     borderWidth: 1,
@@ -217,21 +237,24 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     paddingLeft: 10,
   },
+  listeItemText: {
+    fontFamily: 'Montserrat',
+  },
   textInput: {
     borderWidth: 1,
     borderRadius: 5,
     height: 40,
-    width: 270,
     borderColor: '#C9C9C9',
     marginTop: 5,
     fontSize: 14,
     paddingLeft: 10,
+    fontFamily: 'Montserrat'
   },
   inputContainer: {
     marginBottom: 25,
     position: 'relative',
     marginTop: 40,
-    zIndex: (Platform.OS === 'android') ? undefined : 5
+    zIndex: (Platform.OS === 'android') ? undefined : 5,
   },
   inputContainerStyle: {
     borderBottomWidth: 1,
@@ -240,9 +263,11 @@ const styles = StyleSheet.create({
   environInputContainer: {
     marginTop: 40,
     marginBottom: 25,
+    width: '100%',
   },
   label: {
     color: '#5E5F6F',
+    fontFamily: 'Montserrat',
   },
   button: {
     backgroundColor: '#4152F2',
@@ -254,13 +279,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: 20,
     paddingBottom: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 20,
   },
   buttonsContainer: {
     zIndex: 0,
   },
   buttonText: {
     color: 'white',
+    fontFamily: 'Montserrat-Bold',
   },
   suggestionButton: {
     color: 'red',

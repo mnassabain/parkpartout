@@ -51,9 +51,13 @@ class FicheScreen extends React.Component {
             <View style={styles.itemHeader}>
               <Text style={styles.itemName}>{ this.state.name }</Text>
             </View>
-            <Text style={{marginBottom: 5}}>{ this.formatAddress(this.state.adress) }</Text>
+            <Text style={{marginBottom: 5, fontFamily: 'Montserrat'}}>
+              { this.formatAddress(this.state.adress) }
+            </Text>
             <View style={styles.itemFooter}>
-              <Text>{ this.formatDistance(this.state.dist) }</Text>
+              <Text style={{fontFamily: 'Montserrat'}}>
+                { this.formatDistance(this.state.dist) }
+              </Text>
               { this.state.libre != undefined &&
               <Text style={styles.places}>{ this.state.libre } places</Text> }
             </View>
@@ -64,7 +68,8 @@ class FicheScreen extends React.Component {
           color={'#bdc3c7'}
           onPress={openDestination}
           title="Click To Open Maps"
-        />
+        >
+        </Button>
 
       </SafeAreaView>
     );
@@ -98,7 +103,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemName: {
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-Bold',
+    // fontWeight: 'bold',
     marginBottom: 5,
   },
   itemFooter: {
@@ -108,7 +114,8 @@ const styles = StyleSheet.create({
   },
   places: {
     color: '#67C23A',
-    fontWeight: 'bold'
+    fontFamily: 'Montserrat-Bold',
+    // fontWeight: 'bold'
   },
   mapContainer: {
     width: '90%',
