@@ -231,6 +231,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     position: 'relative',
     marginTop: 40,
+    zIndex: (Platform.OS === 'android') ? undefined : 5
   },
   inputContainerStyle: {
     borderBottomWidth: 1,
