@@ -255,6 +255,9 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     alignItems: 'center'
   },
+  buttonsContainer: {
+    zIndex: 0,
+  },
   buttonText: {
     color: 'white',
   },
