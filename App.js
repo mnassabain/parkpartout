@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet, StatusBar, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './Screen/HomeScreen';
@@ -7,6 +7,7 @@ import FormulaireScreen from './Screen/FormulaireScreen';
 import ListeScreen from './Screen/ListeScreen';
 import FicheScreen from './Screen/FicheScreen';
 import * as Font from 'expo-font';
+import Constants from 'expo-constants';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +34,9 @@ class App extends React.Component {
     if (this.state.fontsLoaded) {
       return (
         <NavigationContainer>
-          <StatusBar/>
+          <View style={{height: Constants.statusBarHeight, backgroundColor: '#2F399B' }}>
+            <StatusBar translucent barStyle={'light-content'} />
+          </View>
           <Stack.Navigator
             screenOptions={{
               headerShown: false
