@@ -121,6 +121,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     marginBottom: 15,
     marginLeft: 0,
+    borderRadius: 10,
+    borderColor: '#f0f0f0',
+    elevation: 0,
   },
   listItemInfo: {
     display: 'flex',

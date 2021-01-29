@@ -89,7 +89,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0,
     paddingVertical: 5,
     backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    borderColor: '#f0f0f0',
     marginBottom: 25,
+    elevation: 0,
   },
   itemInfo: {
     display: 'flex',

@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Rubik',
   },
   bigButton: {
-    backgroundColor: 'white',
     backgroundColor: '#4152F2',
     height: 200,
     width: 200,
