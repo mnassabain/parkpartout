@@ -120,6 +120,25 @@ class FormulaireScreen extends React.Component {
       }
     }
 
+    // deplacer parkings complets à la fin de la liste
+    var indexes = [];
+    var items = [];
+    listeParking.records.forEach((item, index) => {
+      if (item.libre === 0) {
+        indexes.unshift(index);
+        items.push(item);
+      }
+    });
+
+    indexes.forEach(index => {
+      listeParking.records.splice(index, 1);
+    });
+
+    items.forEach(item => {
+      listeParking.records.push(item);
+    });
+    
+
     // on peut setState, car c'est une seule variable, bien moins coûteux que d'update dans une boucle 
     this.setState({listeParking});
 
