@@ -45,7 +45,8 @@ class ListeScreen extends React.Component {
               this.props.navigation.navigate('Fiche', {
                 name: item.fields.name,
                 adress: item.fields.address,
-                dist: item.fields.dist,
+                // dist: item.fields.dist,
+                dist: this.formatDistance(item.fields.dist),
                 libre: item.libre,
               })
             }

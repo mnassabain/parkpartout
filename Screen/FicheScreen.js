@@ -16,22 +16,6 @@ class FicheScreen extends React.Component {
   }
 
   /**
-   * Fonction pour formater l'affichage des distances
-   * @param {float} dist la distance en mètres
-   */
-  formatDistance = function(dist) {
-    if (dist < 1000) {
-      return Math.floor(dist) + ' m';
-    } else {
-      if (dist < 10000) {
-        return Number.parseFloat(dist).toFixed(1) + ' km'
-      } else {
-        return Math.floor(dist / 1000) + ' km';
-      }
-    }
-  };
-
-  /**
    * Fonction pour formater une adresse
    * @param {string} address l'adresse
    */
@@ -56,7 +40,7 @@ class FicheScreen extends React.Component {
             </Text>
             <View style={styles.itemFooter}>
               <Text style={{fontFamily: 'Rubik'}}>
-                { this.formatDistance(this.state.dist) }
+                { this.state.dist }
               </Text>
               { this.state.libre != undefined &&
               <Text style={[styles.places, (this.state.libre === 0) ? styles.full : null ]}>
