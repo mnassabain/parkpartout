@@ -53,13 +53,16 @@ class ListeScreen extends React.Component {
             {/* Affichage du nom, ainsi que de la distance qui sépare chaque parking de notre point de recherche */}
             <CardItem style={styles.listItemInfo}>
               <View>
-                <Text style={{fontFamily: 'Rubik-Medium'}}>
+                <Text style={[styles.itemTitle, (item.libre === 0) ? styles.full : null]}>
                   { item.fields.name }
                 </Text>
               </View>
               <View style={styles.listItemInfoBottom}>
-                <Text style={{fontFamily: 'Rubik'}}>
+                <Text style={[styles.itemText, , (item.libre === 0) ? styles.full : null]}>
                   { this.formatDistance(item.fields.dist) }
+                </Text>
+                <Text style={[styles.places, (item.libre === 0) ? styles.full : null ]}>
+                  { item.libre } places
                 </Text>
               </View>
             </CardItem>
@@ -138,6 +141,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
     fontFamily: 'Montserrat',
+  },
+  places: {
+    color: '#67C23A',
+    fontFamily: 'Rubik',
+  },
+  full: {
+    color: '#aaaaaa'
+  },
+  itemTitle: {
+    fontFamily: 'Rubik-Medium',
+  },
+  itemText: {
+    fontFamily: 'Rubik',
   }
 });
 
