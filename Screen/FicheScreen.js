@@ -59,7 +59,9 @@ class FicheScreen extends React.Component {
                 { this.formatDistance(this.state.dist) }
               </Text>
               { this.state.libre != undefined &&
-              <Text style={styles.places}>{ this.state.libre } places</Text> }
+              <Text style={[styles.places, (this.state.libre === 0) ? styles.full : null ]}>
+                { this.state.libre } places
+              </Text> }
             </View>
           </CardItem>
         </Card>
@@ -117,6 +119,9 @@ const styles = StyleSheet.create({
   places: {
     color: '#67C23A',
     fontFamily: 'Rubik-Bold',
+  },
+  full: {
+    color: '#F56C6C',
   },
   mapContainer: {
     width: '90%',
