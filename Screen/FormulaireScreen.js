@@ -1,6 +1,6 @@
 import { View } from 'native-base';
 import React from 'react';
-import { StyleSheet, SafeAreaView, TextInput, Text, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, SafeAreaView, TextInput, Text, Keyboard, TouchableWithoutFeedback, Platform } from 'react-native';
 import AutoComplete from 'native-base-autocomplete';
 import { Button, ListItem } from 'native-base';
 
