@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-    "@expo/webpack-config": "^0.12.58",
     "expo-cli": "^4.1.6"
   },
   "resolutions": {
