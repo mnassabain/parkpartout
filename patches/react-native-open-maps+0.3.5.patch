@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native-open-maps/index.js b/node_modules/react-native-open-maps/index.js
+index ac8395a..8e9d931 100644
+--- a/node_modules/react-native-open-maps/index.js
++++ b/node_modules/react-native-open-maps/index.js
+@@ -117,6 +117,7 @@ export default function open(params) {
+ 
+ export function createOpenLink({ provider, ...params }) {
+ 	// Returns a delayed async function that opens when executed
++	var defaultProvider;
+ 	if (!provider) {
+ 		defaultProvider = (Platform.OS === 'ios') ? 'apple' : 'google';
+ 	}
