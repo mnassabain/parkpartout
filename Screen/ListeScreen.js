@@ -45,7 +45,8 @@ class ListeScreen extends React.Component {
               this.props.navigation.navigate('Fiche', {
                 name: item.fields.name,
                 adress: item.fields.address,
-                dist: item.fields.dist,
+                // dist: item.fields.dist,
+                dist: this.formatDistance(item.fields.dist),
                 libre: item.libre,
               })
             }
@@ -53,12 +54,17 @@ class ListeScreen extends React.Component {
             {/* Affichage du nom, ainsi que de la distance qui sépare chaque parking de notre point de recherche */}
             <CardItem style={styles.listItemInfo}>
               <View>
-                <Text style={{fontWeight: 'bold'}}>
+                <Text style={[styles.itemTitle, (item.libre === 0) ? styles.full : null]}>
                   { item.fields.name }
                 </Text>
               </View>
               <View style={styles.listItemInfoBottom}>
-                <Text>{ this.formatDistance(item.fields.dist) }</Text>
+                <Text style={[styles.itemText, , (item.libre === 0) ? styles.full : null]}>
+                  { this.formatDistance(item.fields.dist) }
+                </Text>
+                <Text style={[styles.places, (item.libre === 0) ? styles.full : null ]}>
+                  { item.libre } places
+                </Text>
               </View>
             </CardItem>
             </TouchableOpacity>
@@ -107,6 +113,7 @@ const styles = StyleSheet.create({
   },
   total: {
     color: '#868793',
+    fontFamily: 'Rubik',
   },
   listContainer: {
     width: '90%',
@@ -118,6 +125,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     marginBottom: 15,
     marginLeft: 0,
+    borderRadius: 10,
+    borderColor: '#f0f0f0',
+    elevation: 0,
   },
   listItemInfo: {
     display: 'flex',
@@ -131,6 +141,20 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     marginTop: 10,
+    fontFamily: 'Montserrat',
+  },
+  places: {
+    color: '#67C23A',
+    fontFamily: 'Rubik',
+  },
+  full: {
+    color: '#aaaaaa'
+  },
+  itemTitle: {
+    fontFamily: 'Rubik-Medium',
+  },
+  itemText: {
+    fontFamily: 'Rubik',
   }
 });
 

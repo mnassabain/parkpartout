@@ -16,22 +16,6 @@ class FicheScreen extends React.Component {
   }
 
   /**
-   * Fonction pour formater l'affichage des distances
-   * @param {float} dist la distance en mètres
-   */
-  formatDistance = function(dist) {
-    if (dist < 1000) {
-      return Math.floor(dist) + ' m';
-    } else {
-      if (dist < 10000) {
-        return Number.parseFloat(dist).toFixed(1) + ' km'
-      } else {
-        return Math.floor(dist / 1000) + ' km';
-      }
-    }
-  };
-
-  /**
    * Fonction pour formater une adresse
    * @param {string} address l'adresse
    */
@@ -51,11 +35,17 @@ class FicheScreen extends React.Component {
             <View style={styles.itemHeader}>
               <Text style={styles.itemName}>{ this.state.name }</Text>
             </View>
-            <Text style={{marginBottom: 5}}>{ this.formatAddress(this.state.adress) }</Text>
+            <Text style={{marginBottom: 5, fontFamily: 'Rubik'}}>
+              { this.formatAddress(this.state.adress) }
+            </Text>
             <View style={styles.itemFooter}>
-              <Text>{ this.formatDistance(this.state.dist) }</Text>
+              <Text style={{fontFamily: 'Rubik'}}>
+                { this.state.dist }
+              </Text>
               { this.state.libre != undefined &&
-              <Text style={styles.places}>{ this.state.libre } places</Text> }
+              <Text style={[styles.places, (this.state.libre === 0) ? styles.full : null ]}>
+                { this.state.libre } places
+              </Text> }
             </View>
           </CardItem>
         </Card>
@@ -64,7 +54,8 @@ class FicheScreen extends React.Component {
           color={'#bdc3c7'}
           onPress={openDestination}
           title="Click To Open Maps"
-        />
+        >
+        </Button>
 
       </SafeAreaView>
     );
@@ -84,7 +75,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0,
     paddingVertical: 5,
     backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    borderColor: '#f0f0f0',
     marginBottom: 25,
+    elevation: 0,
   },
   itemInfo: {
     display: 'flex',
@@ -98,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   itemName: {
-    fontWeight: 'bold',
+    fontFamily: 'Rubik-Medium',
     marginBottom: 5,
   },
   itemFooter: {
@@ -108,7 +102,10 @@ const styles = StyleSheet.create({
   },
   places: {
     color: '#67C23A',
-    fontWeight: 'bold'
+    fontFamily: 'Rubik-Bold',
+  },
+  full: {
+    color: '#F56C6C',
   },
   mapContainer: {
     width: '90%',
