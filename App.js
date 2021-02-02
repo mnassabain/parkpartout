@@ -7,6 +7,7 @@ import FormulaireScreen from './Screen/FormulaireScreen';
 import ListeScreen from './Screen/ListeScreen';
 import FicheScreen from './Screen/FicheScreen';
 import * as Font from 'expo-font';
+import { Rubik_400Regular, Rubik_500Medium, Rubik_700Bold } from '@expo-google-fonts/rubik';
 import Constants from 'expo-constants';
 
 const Stack = createStackNavigator();
@@ -19,9 +20,9 @@ class App extends React.Component {
 
   async loadFonts() {
     await Font.loadAsync({
-      Rubik: require('./assets/fonts/Rubik-Regular.ttf'),
-      'Rubik-Medium': require('./assets/fonts/Rubik-Medium.ttf'),
-      'Rubik-Bold': require('./assets/fonts/Rubik-SemiBold.ttf'),
+      Rubik: Rubik_400Regular,
+      'Rubik-Medium': Rubik_500Medium,
+      'Rubik-Bold': Rubik_700Bold,
     });
     this.setState({ fontsLoaded: true });
   }
