@@ -1,6 +1,6 @@
 # ParkPartout
 
-## Web version
+## Web version (demo)
 https://parkpartout.netlify.app/ (may contain bugs because it's optimised for iOS & Android)
 
 Built with Expo + React Native
